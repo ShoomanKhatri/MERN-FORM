@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/crud");
+mongoose.connect("mongodb://127.0.0.1:27017/MERN-FORM");
 
 app.get("/", (req, res) => {
   UserModel.find({})
@@ -26,7 +26,14 @@ app.put("/updateUser/:id", (req, res) => {
   const id = req.params.id;
   UserModel.findByIdAndUpdate(
     { _id: id },
-    { name: req.body.name, email: req.body.email, age: req.body.age }
+    {
+      name: req.body.name,
+      email: req.body.email,
+      age: req.body.age,
+      salary: req.body.salary,
+      citizenshipNumber: req.body.citizenshipNumber,
+      gender: req.body.gender,
+    }
   )
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
